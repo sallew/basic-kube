@@ -1,0 +1,4 @@
+1. Create Net10 [10.10.10.0/24]
+2. Verify existens of HostOnly Network [192.168.56.0/24]
+3. user/user - root/root - Run as root
+
