@@ -1,0 +1,45 @@
+# kubectl exec -it ubuntu -- /bin/bash
+# kubectl label nodes w1 key=vm-w1
+# kubectl label nodes w2 key=vm-w2
+# kubectl get nodes --show-labels
+# kubectl exec -it ubuntu-hostnw-container -- /bin/bash
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ubuntu-host1
+  namespace: default
+spec:
+  containers:
+  - image: ubuntu
+    command:
+      - /bin/bash
+      - "-c"
+      - "sleep 60m"
+    imagePullPolicy: IfNotPresent
+    name: ubuntu-container
+  restartPolicy: Never
+  nodeSelector:
+    key: vm-w1
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ubuntu-host2
+  namespace: default
+spec:
+  containers:
+  - image: ubuntu
+    command:
+      - /bin/bash
+      - "-c"
+      - "sleep 60m"
+    imagePullPolicy: IfNotPresent
+    name: ubuntu-container
+  restartPolicy: Never
+  nodeSelector:
+    key: vm-w2
+
+

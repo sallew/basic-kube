@@ -1,0 +1,17 @@
+# kubectl exec -it -c 1st mc2 -- /bin/bash
+# kubectl exec -it -c 2nd mc2 -- /bin/bash
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mc2
+spec:
+  containers:
+  - name: 1st
+    image: ubuntu
+    command: ["/bin/bash", "-c", "sleep 60m"]
+  - name: 2nd
+    image: ubuntu
+    command: ["/bin/bash", "-c", "sleep 60m"]
+  restartPolicy: Never
+

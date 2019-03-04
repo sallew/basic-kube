@@ -1,0 +1,29 @@
+#  HostNetwork
+#  kubectl exec -it ubuntu-hostnw-container -- /bin/bash
+
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: ubuntu-hostnw-deployment
+spec:
+  selector:
+    matchLabels:
+      app: ubuntu-hostnw-instance
+  replicas: 1 # tells deployment to run 1 pod matching the template
+  template:
+    metadata:
+      labels:
+        app: ubuntu-hostnw-instance
+    spec:
+      #hostNetwork: true
+      containers:
+      - name: ubuntu-hostnw-container
+        image: rastasheep/ubuntu-sshd
+        command:
+          - /usr/sbin/sshd 
+          - "-D"
+          - "-p"
+          - "8022"                    
+        ports:
+        - containerPort: 8022
+
