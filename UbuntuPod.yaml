@@ -1,0 +1,14 @@
+# kubectl apply -f UbuntuPod.yaml
+# kubectl -i -t exec ubuntu-pod -- /bin/bash
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: ubuntu-pod
+spec:
+  containers:
+  - name: ubuntu-container
+    image: ubuntu
+    command: ["/bin/bash", "-c", "sleep 60m"]
+  restartPolicy: Never
+
