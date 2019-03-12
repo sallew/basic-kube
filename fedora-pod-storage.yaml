@@ -1,0 +1,29 @@
+
+#
+# ulimit -c unlimited
+# mkdir -p /mnt/storage
+# chmod -R 1777 /mnt/storage
+# echo "/mnt/storage/core.%e.%h.%p.%t " > /proc/sys/kernel/core_pattern
+# kubectl -it exec fedora-pod-storage -- /bin/bash
+# sleep 40 &
+# kill -SEGV <pid>
+#
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: fedora-pod-storage
+spec:
+  volumes:
+  - name: task-pv-storage
+    hostPath:
+      path: "/mnt/storage"
+      type: Directory
+  containers:
+  - name: fedora-container
+    image: fedora
+    command: ["/bin/sh", "-c", "sleep 60m"]
+    volumeMounts:
+    - name: task-pv-storage
+      mountPath: "/mnt/storage"
+  restartPolicy: Never
