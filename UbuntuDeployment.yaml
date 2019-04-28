@@ -1,5 +1,5 @@
 #  HostNetwork
-#  kubectl exec -it ubuntu-hostnw-container -- /bin/bash
+#  kubectl exec -it ubuntu-hostnw-deployment-12345 -- /bin/bash
 
 apiVersion: apps/v1 
 kind: Deployment
