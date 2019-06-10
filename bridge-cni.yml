@@ -12,7 +12,7 @@ spec:
     "isGateway": true,
     "ipam": {
       "type": "host-local",
-      "subnet": "192.168.5.0/24"
+      "subnet": "192.5.5.0/24"
      }
 }'
 EOF
