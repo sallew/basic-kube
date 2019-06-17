@@ -40,7 +40,7 @@ spec:
 EOF
 
 # inside pod
-# ip addr add 20.20.20.101/24 dev net1
+# ip addr add 30.30.30.101/24 dev net1
 # ip link set net1 up
 # ip route del default via 10.244.1.1
-# ip route add default via 20.20.20.1
+# ip route add default via 30.30.30.1
