@@ -1,6 +1,7 @@
 # Example: CNI host-device
 # kubectl label nodes w1 key=vm-w1
 
+cat <<EOF | kubectl create -f -
 apiVersion: "k8s.cni.cncf.io/v1"
 kind: NetworkAttachmentDefinition
 metadata:
@@ -11,9 +12,11 @@ spec:
       "type": "host-device",
       "device": "enp0s9"
     }'
+EOF
 
 ---
 
+cat <<EOF | kubectl create -f -
 apiVersion: v1
 kind: Pod
 metadata:
@@ -34,6 +37,7 @@ spec:
   nodeSelector:
     key: "vm-w1"
   restartPolicy: Never
+EOF
 
 # inside pod
 # ip addr add 20.20.20.101/24 dev net1
