@@ -1,0 +1,28 @@
+cat <<EOF | kubectl create -f -
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: macvlan-conf
+spec:
+  config: '{
+            "cniVersion": "0.3.1",
+            "type": "macvlan",
+            "master": "enp0s9",
+            "ipam": {
+             "type": "dhcp"}
+            }'
+EOF
+
+cat <<EOF | kubectl create -f -
+apiVersion: v1
+kind: Pod
+metadata:
+  name: sample-pod
+  annotations:
+    k8s.v1.cni.cncf.io/networks: macvlan-conf
+spec:
+  containers:
+  - name: samplepod
+    command: ["/bin/bash", "-c", "sleep 2000000000000"]
+    image: dougbtv/centos-network
+EOF
