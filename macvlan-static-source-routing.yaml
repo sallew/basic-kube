@@ -36,10 +36,15 @@ EOF
 
 ---
 
-"ip link set enp0s10 promisc on"
+# Nedded on Virtualbox
+ip link set enp0s10 promisc on
+# Source Routing
 ip rule add from 40.40.40.101/24 table 200
 ip route add default via 40.40.40.1 dev net1 table 200
+# Firewall
 iptables -A INPUT -p tcp --dport 80 -j ACCEPT
 iptables -A INPUT -j DROP
+# Test
 ping -I 40.40.40.101 8.8.8.8
+ssh -b 40.40.40.101 test@a.b.c.d
 
