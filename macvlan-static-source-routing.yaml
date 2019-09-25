@@ -48,3 +48,8 @@ iptables -A INPUT -j DROP
 ping -I 40.40.40.101 8.8.8.8
 ssh -b 40.40.40.101 test@a.b.c.d
 
+# For host connectivity
+# ip link add mynet-shim link enp0s10 type macvlan mode bridge
+# ip addr add 40.40.40.50/32 dev mynet-shim
+# ip link set mynet-shim up
+
