@@ -67,4 +67,11 @@ blackhole 10.244.190.64/26 proto bird
 172.17.0.0/16 dev docker0 proto kernel scope link src 172.17.0.1 linkdown
 root@W1:~#
 
+[root@samplepod-macvlan /]# ip route
+default via 169.254.1.1 dev eth0
+40.40.40.0/24 dev net1  proto kernel  scope link  src 40.40.40.101
+169.254.1.1 dev eth0  scope link
+[root@samplepod-macvlan /]#
+
+
 
