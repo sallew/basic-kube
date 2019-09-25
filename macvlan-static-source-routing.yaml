@@ -50,6 +50,8 @@ ssh -b 40.40.40.101 test@a.b.c.d
 
 # For host connectivity
 # ip link add mynet-shim link enp0s10 type macvlan mode bridge
-# ip addr add 40.40.40.0/24 dev mynet-shim
+# ip addr add 40.40.40.50/24 dev mynet-shim
+## ip route add 40.40.40.0/24 via dev mynet-shim
+## ip route add 40.40.40.101/32 via 40.40.40.50
 # ip link set mynet-shim up
 
