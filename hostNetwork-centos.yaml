@@ -1,0 +1,21 @@
+cat <<EOF | kubectl create -f -
+apiVersion: v1
+kind: Pod
+metadata:
+  name: dougbtv
+spec:
+  hostNetwork: true
+  containers:
+  - name: ubuntu-container
+    image: dougbtv/centos-network
+    command: ["/bin/bash", "-c", "sleep 60m"]
+  restartPolicy: Never
+EOF
+
+# ip addr add 40.40.40.101/24 dev enp0s10
+# ip link set enp0s10 up
+# ip rule add from 40.40.40.101/24 table 200
+# ip route add default via 40.40.40.1 dev net1 table 200
+
+# ping -I 40.40.40.101 8.8.8.8
+# ssh -b 40.40.40.101 test@a.b.c.d
