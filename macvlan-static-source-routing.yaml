@@ -55,3 +55,16 @@ ssh -b 40.40.40.101 test@a.b.c.d
 ## ip route add 40.40.40.101/32 via 40.40.40.50
 # ip link set mynet-shim up
 
+root@W1:~# ip route
+default via 40.40.40.1 dev enp0s10
+10.10.10.0/24 dev enp0s3 proto kernel scope link src 10.10.10.101
+blackhole 10.244.190.64/26 proto bird
+10.244.190.92 dev cali307ad6411c8 scope link
+20.20.20.0/24 dev enp0s8 proto kernel scope link src 20.20.20.101
+30.30.30.0/24 dev enp0s9 proto kernel scope link src 30.30.30.101
+40.40.40.0/24 dev enp0s10 proto kernel scope link src 40.40.40.40
+40.40.40.101 via 40.40.40.50 dev mynet-shim
+172.17.0.0/16 dev docker0 proto kernel scope link src 172.17.0.1 linkdown
+root@W1:~#
+
+
