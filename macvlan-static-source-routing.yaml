@@ -55,6 +55,12 @@ ssh -b 40.40.40.101 test@a.b.c.d
 ## ip route add 40.40.40.101/32 via 40.40.40.50
 # ip link set mynet-shim up
 
+# More namespaces
+# ip netns add red
+# ip link set mynet-shim netns red
+# ip netns exec red bash
+## BOOT_IMAGE=/boot/vmlinuz-4.15.0-66-generic root=UUID=bb8d991d-6d60-4b07-a845-645a4100ebae ro intel_iommu=on pci=assign-busses
+
 root@W1:~# ip route
 default via 40.40.40.1 dev enp0s10
 10.10.10.0/24 dev enp0s3 proto kernel scope link src 10.10.10.101
