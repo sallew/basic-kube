@@ -1,0 +1,98 @@
+kubectl version
+Client Version: version.Info{Major:"1", Minor:"17", GitVersion:"v1.17.2", GitCommit:"59603c6e503c87169aea6106f57b9f242f64df89", GitTreeState:"clean", BuildDate:"2020-01-18T23:30:10Z", GoVersion:"go1.13.5", Compiler:"gc", Platform:"linux/amd64"}
+Server Version: version.Info{Major:"1", Minor:"17", GitVersion:"v1.17.2", GitCommit:"59603c6e503c87169aea6106f57b9f242f64df89", GitTreeState:"clean", BuildDate:"2020-01-18T23:22:30Z", GoVersion:"go1.13.5", Compiler:"gc", Platform:"linux/amd64"}
+
+---
+
+docker version
+Client:
+ Version:           18.09.7
+ API version:       1.39
+ Go version:        go1.10.1
+ Git commit:        2d0083d
+ Built:             Fri Aug 16 14:20:06 2019
+ OS/Arch:           linux/amd64
+ Experimental:      false
+
+Server:
+ Engine:
+  Version:          18.09.7
+  API version:      1.39 (minimum version 1.12)
+  Go version:       go1.10.1
+  Git commit:       2d0083d
+  Built:            Wed Aug 14 19:41:23 2019
+  OS/Arch:          linux/amd64
+  Experimental:     false
+
+---
+
+cat /etc/docker/daemon.json
+{
+  "ipv6": true,
+  "fixed-cidr-v6": "fd00::/80"
+}
+
+---
+
+apiVersion: "k8s.cni.cncf.io/v1"
+kind: NetworkAttachmentDefinition
+metadata:
+  name: sriov-net6
+  annotations:
+    k8s.v1.cni.cncf.io/resourceName: intel.com/intel_sriov_netdevice
+spec:
+  config: '{
+  "type": "sriov",
+  "cniVersion": "0.3.1",
+  "name": "sriov-network",
+  "ipam": {
+        "type": "host-local",
+        "subnet": "fd00::/80",
+        "rangeStart": "fd00::0010",
+        "rangeEnd": "fd00::0020"
+    }
+}'
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: testpod-one
+  annotations:
+    k8s.v1.cni.cncf.io/networks: sriov-net6
+spec:
+  containers:
+  - name: appcntr1
+    image: centos/tools
+    imagePullPolicy: IfNotPresent
+    command: [ "/bin/bash", "-c", "--" ]
+    args: [ "while true; do sleep 300000; done;" ]
+    resources:
+      requests:
+        intel.com/intel_sriov_netdevice: '1'
+      limits:
+        intel.com/intel_sriov_netdevice: '1'
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: testpod-two
+  annotations:
+    k8s.v1.cni.cncf.io/networks: sriov-net6
+spec:
+  containers:
+  - name: appcntr2
+    image: centos/tools
+    imagePullPolicy: IfNotPresent
+    command: [ "/bin/bash", "-c", "--" ]
+    args: [ "while true; do sleep 300000; done;" ]
+    resources:
+      requests:
+        intel.com/intel_sriov_netdevice: '1'
+      limits:
+        intel.com/intel_sriov_netdevice: '1
+
+
