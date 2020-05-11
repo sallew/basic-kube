@@ -1,0 +1,30 @@
+apiVersion: policy/v1beta1
+kind: PodSecurityPolicy
+metadata:
+  creationTimestamp: null
+  name: pod-security-policy-20181130114734
+spec:
+  allowedCapabilities:
+  - SYS_ADMIN
+  - NET_ADMIN
+  allowedHostPaths:
+  - pathPrefix: /bin
+  - pathPrefix: /tmp
+  - pathPrefix: /usr/sbin
+  - pathPrefix: /usr/bin
+  fsGroup:
+    rule: RunAsAny
+  hostIPC: false
+  hostNetwork: false
+  hostPID: false
+  privileged: true
+  runAsUser:
+    rule: RunAsAny
+  seLinux:
+    rule: RunAsAny
+  supplementalGroups:
+    rule: RunAsAny
+  volumes:
+  - hostPath
+  - configMap
+  - secret
