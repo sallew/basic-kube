@@ -43,7 +43,7 @@ EOF
 # mkdir -p /mnt/storage
 # chmod -R 1777 /mnt/storage
 # echo "/mnt/storage/core.%e.%h.%p.%t " > /proc/sys/kernel/core_pattern
-  ## Alternative; # sysctl -w kernel.core_pattern=/mnt/storage/core.%e.%h.%p.%t
+  ## Alternative; sysctl -w kernel.core_pattern=/mnt/storage/core.%e.%h.%p.%t
 # kubectl -it exec fedora-pod-storage -- /bin/bash
   ## inside pod
 # ps 
