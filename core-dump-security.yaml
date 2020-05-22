@@ -44,7 +44,7 @@ EOF
 # chmod -R 1777 /mnt/storage
 # echo "/mnt/storage/core.%e.%h.%p.%t " > /proc/sys/kernel/core_pattern
   ## Alternative; sysctl -w kernel.core_pattern=/mnt/storage/core.%e.%h.%p.%t
-# kubectl -it exec fedora-pod-storage -- /bin/bash
+# kubectl -it exec u1804pss -- /bin/bash
   ## inside pod
 # ps 
   ## get <pid> of bash
@@ -77,7 +77,7 @@ cat <<EOF | kubectl create -f -
 apiVersion: v1
 kind: Pod
 metadata:
-  name: u1804ps
+  name: u1804pss
 spec:
   securityContext:
     fsGroup: 2000
@@ -87,7 +87,7 @@ spec:
       path: "/mnt/storage"
       type: Directory
   containers:
-  - name: u1804cs
+  - name: u1804css
     image: ubuntu:18.04
     command: ["/bin/sh", "-c", "sleep 60m"]
     volumeMounts:
