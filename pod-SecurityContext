@@ -1,0 +1,17 @@
+kind: Pod
+metadata:
+  name: u1804p
+spec:
+  securityContext:
+    fsGroup: 2000
+  containers:
+  - name: u1804c
+  image: ubuntu:18.04
+  command: ["/bin/bash", "-c", "sleep 60m"]
+  securityContext:
+    capabilities:
+    drop:
+    - ALL
+   readOnlyRootFilesystem: true
+   runAsNonRoot: true
+   runAsUser: 1000
