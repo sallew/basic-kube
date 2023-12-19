@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: pod-gold
+  annotations:
+    k8s.v1.cni.cncf.io/networks: gold-net
+spec:
+  containers:
+  - name: smpl
+    command: ["/bin/bash", "-c", "sleep 60m"]
+    image: ubuntu
+    imagePullPolicy: IfNotPresent
