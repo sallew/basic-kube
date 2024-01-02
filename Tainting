@@ -1,0 +1,9 @@
+Tainting
+
+kubectl describe node <nodename> | grep Taints
+node-role.kubernetes.io/master:NoSchedule
+kubectl taint node master node-role.kubernetes.io/master:NoSchedule-
+# Or
+kubectl taint node k8smaster node-role.kubernetes.io/control-plane:NoSchedule-
+k8smaster = <nodename> set with hostnamectl
+
